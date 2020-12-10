@@ -37,13 +37,13 @@ Route::middleware('auth')->group(function(){
             Route::delete('{model}', [AreasController::class, 'destroy'])->name('area.delete');
         });
 
-        Route::prefix('carrera')->group(function () {
-            Route::get('', [CarrerasController::class, 'index'])->name('carrera');
-            Route::get('add', [CarrerasController::class, 'add'])->name('carrera.add');
-            Route::post('', [CarrerasController::class, 'store'])->name('carrera.store');
-            Route::delete('{model}', [CarrerasController::class, 'destroy'])->name('carrera.delete');
-            Route::get('edit/{model}', [CarrerasController::class, 'show'])->name('carrera.edit');
-            Route::patch('{model}', [CarrerasController::class, 'update'])->name('carrera.update');
+        Route::prefix('carreras')->group(function () {
+            Route::get('', [CarrerasController::class, 'index'])->name('carreras');
+            Route::get('add', [CarrerasController::class, 'add'])->name('carreras.add');
+            Route::post('', [CarrerasController::class, 'store'])->name('carreras.store');
+            Route::delete('{model}', [CarrerasController::class, 'destroy'])->name('carreras.delete');
+            Route::get('edit/{model}', [CarrerasController::class, 'show'])->name('carreras.edit');
+            Route::patch('{model}', [CarrerasController::class, 'update'])->name('carreras.update');
         });
         
         Route::prefix('catalogos')->group(function () {
@@ -58,7 +58,7 @@ Rutas para catalogos de la api
 */
 Route::middleware('auth')->group(function(){
     Route::prefix('api-app')->group(function(){
-        Route::get('areas', [ApiAppsController::class, 'colores']);
+        Route::get('areas', [ApiAppsController::class, 'areas']);
         Route::get('sexos', [ApiAppsController::class, 'sexos']);
     });
 });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<a href="{{ route('carrera.add') }}" class="btn btn-info btn-sm">
-    Nuevo Combustible
+<a href="{{ route('carreras.add') }}" class="btn btn-info btn-sm">
+    Nueva carrera
 </a>
 
 <div class="table-responsive">
@@ -17,13 +17,13 @@
                 <td>{{ $row->carrera  }}</td>
                 <td>
                     <div class="btn-group-sm">
-                        {!! Form::open(['route' => ['carrera.delete',$row->id],'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['carreras.delete',$row->id],'method' => 'delete']) !!}
                         {!! Form::token() !!}
                         <button type="submit" class="btn btn-danger btn-sm">
                             Eliminar
                         </button>
                         {!! Form::close() !!}
-                        <a href="{{ route('carrera.edit',$row->id) }}" class="btn btn-danger btn-sm">
+                        <a href="{{ route('carreras.edit',$row->id) }}" class="btn btn-danger btn-sm">
                             Editar
                         </a>
                     </div>

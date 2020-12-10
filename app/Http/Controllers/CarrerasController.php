@@ -8,6 +8,9 @@ use Collective\Html\Eloquent\FormAccessible;
 
 class CarrerasController extends Controller
 {
+    public $rules = [
+        'carrera' => ['required','string']
+    ];
 
     public function index(Request $request)
     {
@@ -15,25 +18,23 @@ class CarrerasController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('catalogos.carrera.index', compact('rows'));
+        return view('catalogos.carreras.index', compact('rows'));
     }
 
     public function add()
     {
-        return view('catalogos.carrera.add');
+        return view('catalogos.carreras.add');
     }
 
     public function show(Carrera $model)
     {
-        return view('catalogos.carrera.edit', compact('model'));
+        return view('catalogos.carreras.edit', compact('model'));
     }
 
-    public function store(Request $request)
-    {
-        $model = new Carrera;
-        $model->carrera = $request->carrera;
-        $model->save();
-        return redirect()->route('carrera');
+    public function store(Request $request){
+       // $campos=$this->validate($request,$this->rules);
+        $model=Carrera::query()->create($request->all());
+        return redirect()->route('carreras');
     }
 
     public function update(Carrera $model, Request $request)
