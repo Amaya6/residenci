@@ -23,26 +23,25 @@ class AreasController extends Controller
         return view('catalogos.areas.index', compact('rows'));
     }
 
-    public function edit(Area $model){
-
-        return view('catalogos.areas.edit',compact('model'));
-    }
-
     public function add(){
         return view('catalogos.areas.add');
     }
 
+    public function show (Area $model){
+        return view('catalogos.area.edit', compact('model'));
+    }
+
     public function store(Request $request){
-        $campos=$this->validate($request,$this->rules);
-        $model=Area::query()->create($campos);
+        $model=new Area;
+        $model->area=$request->area;
+        $model->save();
         return redirect()->route('area');
     }
 
-    public function update(Area $model,Request $request){
-        $campos=$this->validate($request,$this->rules);
-        $model->fill($campos);
-        $model->save();
-        return redirect()->route('area');
+    public function update(Area $model, Request $request){
+       $model->area=$request->area;
+       $model->save();
+       return redirect()->route('area');
     }
 
     public function destroy(Area $model){

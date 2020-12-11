@@ -1,13 +1,16 @@
 @extends('layouts.app')
 @section('content')
-<a href="{{ route('carreras.add') }}" class="btn btn-info btn-sm">
-    Nueva carrera
+<a href="{!! route('carreras.add') !!}" class="btn btn-link">
+    <i class="fas fa-plus-circle "></i> Agregar
 </a>
 
 <div class="table-responsive">
     <table class="table table-sm">
-        <thead>
-            <tr class="bg-dark text-white">
+        <thead class='thead-light'>
+            <tr role="rowheader">
+                <th width="100">ID
+                <th>Carrera</th>
+                <th width="100"></th>
             </tr>
         </thead>
         <tbody>
@@ -16,17 +19,26 @@
                 <td>{{ $row->id  }}</td>
                 <td>{{ $row->carrera  }}</td>
                 <td>
-                    <div class="btn-group-sm">
-                        {!! Form::open(['route' => ['carreras.delete',$row->id],'method' => 'delete']) !!}
+                   
+                        
+                    <div class="btn-group">
+                        {!! Form::open(['route'=>['carreras.delete',$row->id],'method'=>'delete']) !!}
                         {!! Form::token() !!}
                         <button type="submit" class="btn btn-danger btn-sm">
                             Eliminar
+
                         </button>
+                        
                         {!! Form::close() !!}
-                        <a href="{{ route('carreras.edit',$row->id) }}" class="btn btn-danger btn-sm">
+                        
+                       <div>
+                        <a href="{{route('carreras.edit',$row->id)}}" class="btn btn-success btn-sm">
                             Editar
-                        </a>
+                        </a></div>
+                        
+                        
                     </div>
+
                 </td>
             </tr>
             @endforeach

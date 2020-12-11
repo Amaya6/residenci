@@ -14,13 +14,8 @@ class Estudiante extends Model
 
      //Definiendo los campos de la tabla
      protected $fillable = [
-         'nombres',
-         'apellidos',
-         'carrera_id',
-         'sexo_id',
-         'etnia_id',
-         'procedencia',
-         'telefono',
-         'carnet',
+         'estudiante',
+        
+       
         ];
 }

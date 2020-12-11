@@ -2,66 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
+use Collective\Html\Eloquent\FormAccessible;
 
 class EstudiantesController extends Controller
 {
-    
     public $rules = [
-        "nombres" => ['required', 'string','max:60'],
-        "apellidos" => ['required', 'string'],
-        "identidad" => ['required', 'string'],
-        "sexo_id" => ['required', 'numeric'],
-        "etnia_id" => ['required', 'numeric'],
-        "direccion" => ['required', 'string'],
-        "celular" => ['required', 'string'],
-        "fecha_nacimiento" => ['required', 'date'],
+        'estudiante' => ['required','string']
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        $estudiantes = Estudiante::all();
-        return view('app.estudiantes.index', compact("estudiantes"));
+        $rows = Estudiante::query()
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('catalogos.estudiantes.index', compact('rows'));
     }
 
-   
     public function add()
-    {     $model=false; 
-
-        return view('app.estudiantes.add',compact("model"));
+    {
+        return view('catalogos.estudiantes.add');
     }
 
-   
-    public function store(Request $request, Persona $model)
+    public function show(Estudiante $model)
     {
-        $campos = $this->validate($request, $this->rules);
-
-        $model->create($campos);
-
-        return redirect()->route('estudiante');
+        return view('catalogos.estudiantes.edit', compact('model'));
     }
 
-    public function show(Estudiante $persona)
-    {
-        //
+    public function store(Request $request){
+       // $campos=$this->validate($request,$this->rules);
+        $model=Estudiante::query()->create($request->all());
+        return redirect()->route('estudiantes');
     }
 
-    public function edit(Estudiante $model)
+    public function update(Estudiante $model, Request $request)
     {
-        return view('app.estudiante.edit', compact('model'));
+        $model->estudiante = $request->estudiante;
+        $model->save();
+        return redirect()->route('estudiantes');
     }
 
-    public function update(Request $request, Persona $model)
+    public function destroy(Estudiante $model)
     {
-        $campos=$this->validate($request,$this->rules);
-
-        $model->update($campos);
-
-        return redirect()->route('estudiante');
-    }
-
-    public function destroy(Estudiante $estudiante)
-    {
-        //
+        $model->delete();
+        return redirect()->route('estudiantes');
     }
 }

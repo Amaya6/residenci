@@ -5,6 +5,8 @@ use App\Http\Controllers\CarrerasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreasController;
 use App\Http\Controllers\ApiAppsController;
+use App\Http\Controllers\EstudiantesController;
+use App\Http\Controllers\RolesController;
 
 
 /*
@@ -22,11 +24,25 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 
-Auth::routes(['register'=>true]);
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function(){
+
+Route::middleware('auth')->group(function()
+{
+
+    Route::prefix('app')->group(function(){
+        Route::prefix('roles')->group(function () {
+            Route::get('', [RolesController::class, 'index'])->name('roles');
+            Route::get('add', [RolesController::class, 'add'])->name('roles.add');
+            Route::get('edit/{model}', [RolesController::class, 'edit'])->name('roles.edit');
+            Route::post('', [RolesController::class, 'store'])->name('roles.store');
+            Route::patch('{model}', [RolesController::class, 'update'])->name('roles.update');
+            Route::delete('{model}', [RolesController::class, 'destroy'])->name('roles.delete');
+        });
+        });
+    
     Route::prefix('catalogos')->group(function(){
         Route::prefix('areas')->group(function () {
             Route::get('', [AreasController::class, 'index'])->name('area');
@@ -46,6 +62,15 @@ Route::middleware('auth')->group(function(){
             Route::patch('{model}', [CarrerasController::class, 'update'])->name('carreras.update');
         });
         
+        Route::prefix('estudiantes')->group(function () {
+            Route::get('', [EstudiantesController::class, 'index'])->name('estudiantes');
+            Route::get('add', [EstudiantesController::class, 'add'])->name('estudiantes.add');
+            Route::post('', [EstudiantesController::class, 'store'])->name('estudiantes.store');
+            Route::delete('{model}', [EstudiantesController::class, 'destroy'])->name('estudiantes.delete');
+            Route::get('edit/{model}', [EstudiantesController::class, 'show'])->name('estudiantes.edit');
+            Route::patch('{model}', [EstudiantesController::class, 'update'])->name('estudiantes.update');
+        });
+        
         Route::prefix('catalogos')->group(function () {
             Route::get('carrera', [CatalogosController::class, 'getCarreras']);
         });
@@ -59,6 +84,8 @@ Rutas para catalogos de la api
 Route::middleware('auth')->group(function(){
     Route::prefix('api-app')->group(function(){
         Route::get('areas', [ApiAppsController::class, 'areas']);
+        Route::get('estudiantes', [ApiAppsController::class, 'estudiantes']);
         Route::get('sexos', [ApiAppsController::class, 'sexos']);
+     
     });
 });

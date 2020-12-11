@@ -14,11 +14,9 @@ class Rol extends Model
 
      //Definiendo los campos de la tabla
      protected $fillable = [
-         'estudiantes_id',
-         'actividades_id',
-         'areas_id',
-         'diasemana_id',
-         'semana_id',
+        'actividad',
+         'estudiante_id',
+         'area_id',
          'fecha',
   
         ];

@@ -41,12 +41,12 @@ class CarrerasController extends Controller
     {
         $model->carrera = $request->carrera;
         $model->save();
-        return redirect()->route('carrera');
+        return redirect()->route('carreras');
     }
 
     public function destroy(Carrera $model)
     {
         $model->delete();
-        return redirect()->route('carrera');
+        return redirect()->route('carreras');
     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <a href="{!! route('area.add') !!}" class="btn btn-link">
+        <a href="{!! route('estudiantes.add') !!}" class="btn btn-link">
             <i class="fas fa-plus-circle "></i> Agregar
         </a>
         <div class="table-responsive">
@@ -10,7 +10,7 @@
                 <thead class='thead-light'>
                     <tr role="rowheader">
                         <th width="100">ID
-                        <th>Area</th>
+                        <th>Estudiantes</th>
                         <th width="100"></th>
                     </tr>
                 </thead>
@@ -18,13 +18,13 @@
                     @foreach ($rows as $row)
                     <tr role="row">
                         <td>{{ $row->id }}</td>
-                        <td>{{ $row->area }}</td>
+                        <td>{{ $row->estudiante }}</td>
 
                        
                         <td>
 
                             <div class="btn-group">
-                                {!! Form::open(['route'=>['area.delete',$row->id],'method'=>'delete']) !!}
+                                {!! Form::open(['route'=>['estudiantes.delete',$row->id],'method'=>'delete']) !!}
                                 {!! Form::token() !!}
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     Eliminar
@@ -34,7 +34,7 @@
                                 {!! Form::close() !!}
                                 
                                <div>
-                                <a href="{{route('area.edit',$row->id)}}" class="btn btn-success btn-sm">
+                                <a href="{{route('estudiantes.edit',$row->id)}}" class="btn btn-success btn-sm">
                                     Editar
                                 </a></div>
                                 

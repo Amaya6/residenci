@@ -15,10 +15,9 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('actividad')->constrained('actividades');
             $table->foreignId('estudiante_id')->constrained('estudiantes');
-            $table->foreignId('actividad_id')->constrained('actividades');
             $table->foreignId('area_id')->constrained('areas');
-            $table->foreignId('dia_id')->constrained('semanas');
             $table->date('fecha');
             $table->timestamps();
         });

@@ -9,7 +9,7 @@
   <div class="card-body">
     <div class="row">
         <div class="col-12">
-            <a href="{!! route('persona.add') !!}">
+            <a href="{!! route('roles.add') !!}">
                 Agregar</a>
         </div>
     </div>
@@ -17,23 +17,23 @@
         <thead>
             <tr>
                 <th>Código</th>
-                <th>Nombre</th>
-                <th>Sexo</th>
-                <th>Etnia</th>
-                <th>Edad</th>
+                <th>Actividas</th>
+                <th>Area</th>
+                <th>Estudiante</th>
+                <th>Fecha</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($estudiantes as $estudiante)
+            @foreach ($roles as $rol)
             <tr>
-                <td scope="row">{{ $estudiante->id }} </td>
-                <td>{{ $persona->full_name }} </td>
-                <td>{{ $persona->sexo->sexo_full }} </td>
-                <td>{{ $persona->etnia->etnia }} </td>
-                <td>{{ $persona->edad }} </td>
+                <td scope="row">{{ $rol->id }} </td>
+                <td>{{ $rol->actividad}} </td>
+                <td>{{ $rol->sexo->area }} </td>
+                <td>{{ $rol->etnia->estudiante }} </td>
+                <td>{{ $rol->fecha }} </td>
                 <td>
-                    <a href="{!! route('persona.edit',$estudiante->id) !!} ">
+                    <a href="{!! route('persona.edit',$rol->id) !!} ">
                         <i class="fas fa-pen-alt    "></i>
                     </a>
                 </td>
